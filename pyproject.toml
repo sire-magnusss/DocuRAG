@@ -51,6 +51,7 @@ dev = [
     "black",
     "pytest",
     "pytest-cov",
+    "httpx",
     "ruff",
     "autodoc_pydantic",
     "sphinx",

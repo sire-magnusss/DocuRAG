@@ -79,7 +79,7 @@ def rerank(
 ) -> Tuple[float, List[Document]]:
     logger.info("Reranking documents ... ")
     scores = rerank_model.get_scores(query, docs)
-    print(scores)
+    logger.debug("Reranker raw scores: {}", scores)
     for score, d in zip(scores, docs):
         d.metadata["score"] = score
 

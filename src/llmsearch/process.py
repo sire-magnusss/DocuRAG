@@ -149,7 +149,7 @@ def process_obsidian_uri(
     Returns:
         str: document name with a header suffix.
     """
-    print(metadata)
+    logger.debug("Processing document metadata: {}", metadata)
     append_str = adv_uri_config.append_heading_template.format(
         heading=metadata["heading"]
     )

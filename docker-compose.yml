@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  llmsearch-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pyllmsearch:latest
+    container_name: llmsearch_api
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount your YAML config files here
+      - ./sample_templates:/config:ro
+      # Mount a persistent folder for embeddings / model cache
+      - llmsearch_cache:/cache
+    environment:
+      # Point to config files inside the container (adjust filenames as needed)
+      FASTAPI_RAG_CONFIG: /config/rag_config.yaml
+      FASTAPI_LLM_CONFIG: /config/llm_config.yaml
+
+      # Optional: enable API key authentication
+      # LLMSEARCH_API_KEY: changeme
+
+      # LLM provider keys (uncomment and fill in as needed)
+      # OPENAI_API_KEY: sk-...
+      # GOOGLE_API_KEY: AIza...
+      # AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT: https://...
+      # AZURE_DOCUMENT_INTELLIGENCE_KEY: ...
+    restart: unless-stopped
+
+volumes:
+  llmsearch_cache:
